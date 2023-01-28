@@ -1,3 +1,5 @@
+// more items added for better testing
+
 const cart = {
   total: {
     amount: 91.6,
@@ -14,6 +16,21 @@ const cart = {
       amount: 1,
       price: 29,
     },
+    {
+      name: "Pineapple",
+      amount: 3,
+      price: 100,
+    },
+    {
+      name: "Lemon",
+      amount: 1,
+      price: 10,
+    },
+    {
+      name: "Kiwi",
+      amount: 3,
+      price: 70,
+    },
   ],
 };
 
@@ -24,27 +41,22 @@ const shopping_cart = JSON.parse(cartStr);
 
 let cheapest = null;
 
-shopping_cart.items.forEach((item) => {
-  // if (cheapest === null || cheapest.price > item.price) {
-  //   cheapest = item;
-  // }
-  cheapest = cheapest === null || cheapest.price > item.price ? item : cheapest;
-});
-
 /////////////////////////////////////////////////////////////////////////////////
 const btn = document.querySelector("button.remove-cheapest");
 
-btn.addEventListener("click", (event) => {
-  console.log(cheapest);
+btn.addEventListener("click", (e) => {
   shopping_cart.items.forEach((item, index) => {
+    cheapest =
+      cheapest === null || cheapest.price > item.price ? item : cheapest;
     console.log(cheapest);
-    console.log(index);
-
-    if (item.price === 29) {
-      shopping_cart.items.splice(index, 1);
-    }
   });
-  console.log(shopping_cart.items);
+
+  const cheapestIndx = cart.items.indexOf(cheapest);
+  console.log(cheapestIndx);
+
+  shopping_cart.items.splice(cheapestIndx, 1);
+
+  displayItems(shopping_cart);
 });
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -57,19 +69,7 @@ btn.addEventListener("click", (event) => {
 // }
 
 // displayItems(cart)
-///////////////////////////////////////////////////////////////////////////////////////////////////
-// const displayItems = (obj) => {
-//   let list = document.querySelector("ul.items");
 
-//   obj.items.forEach((ite) => {
-//     let listItem = document.createElement("li");
-//     listItem.classList.add("items__item");
-//     listItem.innerHTML = `${ite.name} (${ite.amount})`;
-//     list.appendChild(listItem);
-//   });
-// };
-
-// displayItems(cart);
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 const displayItems = (obj) => {
   let list = document.querySelector("ul.items");
@@ -83,5 +83,4 @@ const displayItems = (obj) => {
   });
 };
 
-displayItems(cart);
-
+displayItems(shopping_cart);
