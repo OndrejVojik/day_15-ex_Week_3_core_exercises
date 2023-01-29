@@ -83,4 +83,27 @@ const displayItems = (obj) => {
   });
 };
 
+const btn_add = document.querySelector(".add-item");
+btn_add.addEventListener("click", (e) => {
+  let item_name = document.querySelector("input[name='name']").value;
+  // const item_name = document.querySelector(".item-name-input").value;
+  let item_amount = document.querySelector("input[name='amount']").value;
+  let item_price = document.querySelector("input[name='price']").value;
+
+  shopping_cart.items.push({
+    name: item_name,
+    amount: item_amount,
+    price: item_price,
+  });
+  displayItems(shopping_cart);
+// this is not working
+//   item_name = "";
+//   item_amount = "";
+//   item_price = "";
+  document.querySelector("input[name='name']").value = "";
+  document.querySelector("input[name='amount']").value = "";
+  document.querySelector("input[name='price']").value = "";
+
+});
+
 displayItems(shopping_cart);
